@@ -25,8 +25,8 @@
                     {{ user.about|default:"Описание профиля пока не добавлено." }}
                 </p>
                 <div class="profile-contacts">
-                    {% if user.email %}
-                    <span>{% include 'includes/svg/email.html' %} {{ user.email }}</span>
+                    {% if user.user.email %}
+                    <span>{% include 'includes/svg/email.html' %} {{ user.user.email }}</span>
                     {% endif %}
                     {% if user.phone %}
                     <span>{% include 'includes/svg/phone.html' %} {{ user.phone }}</span>
