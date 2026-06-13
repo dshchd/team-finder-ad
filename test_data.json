@@ -1,0 +1,249 @@
+[
+{
+  "model": "users.skill",
+  "pk": 1,
+  "fields": {
+    "name": "Python"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 2,
+  "fields": {
+    "name": "Django"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 3,
+  "fields": {
+    "name": "Figma"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 4,
+  "fields": {
+    "name": "PostgreSQL"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 5,
+  "fields": {
+    "name": "UI/UX Design"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 6,
+  "fields": {
+    "name": "Prototyping"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 7,
+  "fields": {
+    "name": "Docker"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 8,
+  "fields": {
+    "name": "React"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 9,
+  "fields": {
+    "name": "JavaScript"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 10,
+  "fields": {
+    "name": "TypeScript"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 11,
+  "fields": {
+    "name": "CSS"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 12,
+  "fields": {
+    "name": "CI/CD"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 13,
+  "fields": {
+    "name": "Kubernetes"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "name": "Даша",
+    "surname": "Черткова",
+    "avatar": "avatars/alpha_MVQ8V6z.jpg",
+    "about": "UI/UX дизайнер. Создаю интерфейсы для веб- и мобильных приложений, работаю в Figma, интересуюсь исследованиями пользователей.",
+    "phone": "+71234567890",
+    "github_url": "https://github.com/dshchd",
+    "created_at": "2026-06-10T21:31:41.528Z",
+    "skills": [
+      3,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 7,
+  "fields": {
+    "user": 7,
+    "name": "Максим",
+    "surname": "Ковалев",
+    "avatar": "avatars/comp1.jpg",
+    "about": "Backend-разработчик на Python. Люблю Django, PostgreSQL и автоматизацию процессов.",
+    "phone": "",
+    "github_url": "https://github.com/maxx",
+    "created_at": "2026-06-12T21:09:35.809Z",
+    "skills": [
+      7,
+      1,
+      4,
+      2
+    ]
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 8,
+  "fields": {
+    "user": 8,
+    "name": "Елизавета",
+    "surname": "Орлова",
+    "avatar": "avatars/comp.webp",
+    "about": "Frontend-разработчик. Работаю с React и TypeScript, люблю создавать удобные пользовательские интерфейсы.",
+    "phone": "",
+    "github_url": "https://github.com/lizaor",
+    "created_at": "2026-06-12T21:12:00.745Z",
+    "skills": [
+      8,
+      9,
+      10,
+      11
+    ]
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 9,
+  "fields": {
+    "user": 9,
+    "name": "Артем",
+    "surname": "Соколов",
+    "avatar": "avatars/нейро.jpg",
+    "about": "Full-stack разработчик. Интересуюсь стартапами, облачными технологиями и DevOps-практиками.",
+    "phone": "",
+    "github_url": "https://github.com/artem-volkov",
+    "created_at": "2026-06-12T21:16:00.478Z",
+    "skills": [
+      12,
+      1,
+      7,
+      13
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 8,
+  "fields": {
+    "name": "Платформа поиска мероприятий EventHub",
+    "description": "Сервис для поиска и публикации локальных мероприятий с возможностью регистрации участников.",
+    "github_url": "",
+    "owner": 9,
+    "status": "open",
+    "created_at": "2026-06-12T21:18:00.076Z",
+    "participants": [
+      9
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 9,
+  "fields": {
+    "name": "Библиотека дизайн-систем DesignBase",
+    "description": "Каталог готовых UI-компонентов и дизайн-паттернов для команд разработки.",
+    "github_url": "",
+    "owner": 1,
+    "status": "closed",
+    "created_at": "2026-06-12T21:20:12.543Z",
+    "participants": [
+      1
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 10,
+  "fields": {
+    "name": "Платформа для изучения языков SpeakEasy",
+    "description": "Онлайн-сервис для практики иностранных языков через общение и интерактивные упражнения.",
+    "github_url": "",
+    "owner": 8,
+    "status": "open",
+    "created_at": "2026-06-12T21:20:54.971Z",
+    "participants": [
+      8,
+      1
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 11,
+  "fields": {
+    "name": "Финансовый помощник BudgetTrack",
+    "description": "Сервис для учёта личных расходов и доходов с визуализацией статистики.",
+    "github_url": "",
+    "owner": 7,
+    "status": "open",
+    "created_at": "2026-06-12T21:21:32.035Z",
+    "participants": [
+      7
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 12,
+  "fields": {
+    "name": "Система управления задачами TaskFlow",
+    "description": "Веб-приложение для управления командными задачами с поддержкой ролей, комментариев и уведомлений.",
+    "github_url": "",
+    "owner": 7,
+    "status": "open",
+    "created_at": "2026-06-12T21:21:59.869Z",
+    "participants": [
+      7,
+      1
+    ]
+  }
+}
+]
