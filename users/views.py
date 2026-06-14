@@ -1,39 +1,39 @@
-from django.shortcuts import render, redirect
+import json
+
 from django.contrib.auth import (
     authenticate,
     login,
     logout,
     update_session_auth_hash,
 )
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import (
-    LoginForm,
-    RegisterForm,
-    ProfileForm,
-)
-
-from django.http import JsonResponse
-import json
 from django.core.paginator import Paginator
-from .models import Profile, Skill
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import LoginForm, RegisterForm, UserForm
+from .models import Skill, User
+
+
+USERS_PER_PAGE = 12
+DEFAULT_PAGE_NUMBER = 1
+SKILLS_SUGGESTIONS_LIMIT = 10
 
 
 def users_list(request):
-
     active_skill = request.GET.get("skill")
 
-    profiles = Profile.objects.all()
+    users = (
+        User.objects
+        .prefetch_related("skills")
+        .order_by("-created_at")
+    )
 
     if active_skill:
-        profiles = profiles.filter(
-            skills__name=active_skill
-        )
+        users = users.filter(skills__name=active_skill)
 
-    paginator = Paginator(profiles, 12)
-
-    page_number = request.GET.get("page")
-
+    paginator = Paginator(users, USERS_PER_PAGE)
+    page_number = request.GET.get("page", DEFAULT_PAGE_NUMBER)
     page_obj = paginator.get_page(page_number)
 
     return render(
@@ -41,179 +41,138 @@ def users_list(request):
         "users/participants.html",
         {
             "page_obj": page_obj,
-            "all_skills": Skill.objects.all().order_by("name"),
+            "all_skills": Skill.objects.all(),
             "active_skill": active_skill,
             "query_prefix": "",
-        }
+        },
     )
 
+
 def user_detail(request, pk):
-    profile = Profile.objects.get(id=pk)
+    user = get_object_or_404(
+        User.objects.prefetch_related(
+            "skills",
+            "owned_projects",
+            "owned_projects__participants",
+        ),
+        id=pk,
+    )
 
     return render(
         request,
         "users/user-details.html",
         {
-            "user": profile,
-        }
+            "user": user,
+        },
     )
 
 
 def edit_profile(request):
+    form = UserForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=request.user,
+    )
 
-    profile = request.user.profile
-
-    if request.method == "POST":
-
-        form = ProfileForm(
-            request.POST,
-            request.FILES,
-            instance=profile
-        )
-
-        if form.is_valid():
-            form.save()
-
-            return redirect(
-                f"/users/{profile.id}/"
-            )
-
-    else:
-
-        form = ProfileForm(
-            instance=profile
-        )
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect(f"/users/{request.user.id}/")
 
     return render(
         request,
         "users/edit_profile.html",
         {
-            "user": profile,
+            "user": request.user,
             "form": form,
-        }
+        },
     )
 
+
 def change_password(request):
+    form = PasswordChangeForm(
+        request.user,
+        request.POST or None,
+    )
 
-    if request.method == "POST":
+    if request.method == "POST" and form.is_valid():
+        user = form.save()
+        update_session_auth_hash(request, user)
 
-        form = PasswordChangeForm(
-            request.user,
-            request.POST
-        )
-
-        if form.is_valid():
-
-            user = form.save()
-
-            update_session_auth_hash(
-                request,
-                user
-            )
-
-            return redirect(
-                f"/users/{request.user.profile.id}/"
-            )
-
-    else:
-
-        form = PasswordChangeForm(
-            request.user
-        )
+        return redirect(f"/users/{request.user.id}/")
 
     return render(
         request,
         "users/change_password.html",
         {
             "form": form,
-        }
+        },
     )
+
 
 def logout_view(request):
     logout(request)
     return redirect("/")
 
+
 def login_view(request):
+    form = LoginForm(request.POST or None)
 
-    if request.method == "POST":
-        form = LoginForm(request.POST)
+    if request.method == "POST" and form.is_valid():
+        email = form.cleaned_data["email"]
+        password = form.cleaned_data["password"]
 
-        if form.is_valid():
-            username = form.cleaned_data["email"]
-            password = form.cleaned_data["password"]
+        user = authenticate(
+            request,
+            username=email,
+            password=password,
+        )
 
-            user = authenticate(
-                request,
-                username=username,
-                password=password
-            )
+        if user:
+            login(request, user)
+            return redirect("/")
 
-            if user:
-                login(request, user)
-                return redirect("/")
-            else:
-                form.add_error(
-                    None,
-                    "Неверный email или пароль"
-                )
-
-    else:
-        form = LoginForm()
+        form.add_error(None, "Неверный email или пароль")
 
     return render(
         request,
         "users/login.html",
         {
             "form": form,
-        }
+        },
     )
 
+
 def register_view(request):
+    form = RegisterForm(request.POST or None)
 
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
+    if request.method == "POST" and form.is_valid():
+        email = form.cleaned_data["email"]
 
-        if form.is_valid():
+        user = User.objects.create_user(
+            email=email,
+            password=form.cleaned_data["password"],
+            name=form.cleaned_data["name"],
+            surname=form.cleaned_data["surname"],
+        )
 
-            email = form.cleaned_data["email"]
-
-            if User.objects.filter(username=email).exists():
-                form.add_error("email", "Пользователь уже существует")
-
-            else:
-                user = User.objects.create_user(
-                    username=email,
-                    email=email,
-                    password=form.cleaned_data["password"]
-                )
-
-                Profile.objects.create(
-                    user=user,
-                    name=form.cleaned_data["name"],
-                    surname=form.cleaned_data["surname"]
-                )
-
-                login(request, user)
-                return redirect("/")
-
-    else:
-        form = RegisterForm()
+        login(request, user)
+        return redirect("/")
 
     return render(
         request,
         "users/register.html",
         {
             "form": form,
-        }
+        },
     )
 
-def skills_list(request):
 
-    q = request.GET.get("q", "")
+def skills_list(request):
+    query = request.GET.get("q", "")
 
     skills = Skill.objects.filter(
-        name__icontains=q
-    ).order_by("name")[:10]
+        name__icontains=query,
+    )[:SKILLS_SUGGESTIONS_LIMIT]
 
     return JsonResponse(
         [
@@ -223,29 +182,23 @@ def skills_list(request):
             }
             for skill in skills
         ],
-        safe=False
+        safe=False,
     )
 
 
 def add_skill(request, user_id):
-
-    profile = Profile.objects.get(id=user_id)
+    user = get_object_or_404(User, id=user_id)
 
     data = json.loads(request.body)
 
     if "skill_id" in data:
-
-        skill = Skill.objects.get(
-            id=data["skill_id"]
-        )
-
+        skill = get_object_or_404(Skill, id=data["skill_id"])
     else:
-
         skill, _ = Skill.objects.get_or_create(
-            name=data["name"]
+            name=data["name"],
         )
 
-    profile.skills.add(skill)
+    user.skills.add(skill)
 
     return JsonResponse(
         {
@@ -256,15 +209,13 @@ def add_skill(request, user_id):
 
 
 def remove_skill(request, user_id, skill_id):
+    user = get_object_or_404(User, id=user_id)
+    skill = get_object_or_404(Skill, id=skill_id)
 
-    profile = Profile.objects.get(id=user_id)
-
-    skill = Skill.objects.get(id=skill_id)
-
-    profile.skills.remove(skill)
+    user.skills.remove(skill)
 
     return JsonResponse(
         {
-            "status": "ok"
+            "status": "ok",
         }
     )

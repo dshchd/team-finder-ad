@@ -3,42 +3,42 @@
   "model": "users.skill",
   "pk": 1,
   "fields": {
-    "name": "Python"
+    "name": "Figma"
   }
 },
 {
   "model": "users.skill",
   "pk": 2,
   "fields": {
-    "name": "Django"
+    "name": "UI/UX Design"
   }
 },
 {
   "model": "users.skill",
   "pk": 3,
   "fields": {
-    "name": "Figma"
+    "name": "Prototyping"
   }
 },
 {
   "model": "users.skill",
   "pk": 4,
   "fields": {
-    "name": "PostgreSQL"
+    "name": "Python"
   }
 },
 {
   "model": "users.skill",
   "pk": 5,
   "fields": {
-    "name": "UI/UX Design"
+    "name": "Django"
   }
 },
 {
   "model": "users.skill",
   "pk": 6,
   "fields": {
-    "name": "Prototyping"
+    "name": "PostgreSQL"
   }
 },
 {
@@ -52,148 +52,177 @@
   "model": "users.skill",
   "pk": 8,
   "fields": {
-    "name": "React"
+    "name": "CI/CD"
   }
 },
 {
   "model": "users.skill",
   "pk": 9,
+  "fields": {
+    "name": "Kubernetes"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 10,
+  "fields": {
+    "name": "React"
+  }
+},
+{
+  "model": "users.skill",
+  "pk": 11,
   "fields": {
     "name": "JavaScript"
   }
 },
 {
   "model": "users.skill",
-  "pk": 10,
+  "pk": 12,
   "fields": {
     "name": "TypeScript"
   }
 },
 {
   "model": "users.skill",
-  "pk": 11,
+  "pk": 13,
   "fields": {
     "name": "CSS"
   }
 },
 {
-  "model": "users.skill",
-  "pk": 12,
-  "fields": {
-    "name": "CI/CD"
-  }
-},
-{
-  "model": "users.skill",
-  "pk": 13,
-  "fields": {
-    "name": "Kubernetes"
-  }
-},
-{
-  "model": "users.profile",
+  "model": "users.user",
   "pk": 1,
   "fields": {
-    "user": 1,
-    "name": "Даша",
+    "password": "pbkdf2_sha256$1000000$VHAeJkE84obZ6veS1HIELu$Id74tZQ8Ux0A6bm39ElR8h6fxFfZvqKH152CswFFmEo=",
+    "last_login": "2026-06-14T19:54:48.888Z",
+    "is_superuser": false,
+    "username": "tchertkovadasha@yandex.ru",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-14T19:54:47.532Z",
+    "email": "tchertkovadasha@yandex.ru",
+    "name": "Дарья",
     "surname": "Черткова",
-    "avatar": "avatars/alpha_MVQ8V6z.jpg",
+    "avatar": "",
     "about": "UI/UX дизайнер. Создаю интерфейсы для веб- и мобильных приложений, работаю в Figma, интересуюсь исследованиями пользователей.",
     "phone": "+71234567890",
     "github_url": "https://github.com/dshchd",
-    "created_at": "2026-06-10T21:31:41.528Z",
+    "created_at": "2026-06-14T19:54:48.866Z",
+    "groups": [],
+    "user_permissions": [],
     "skills": [
-      3,
-      5,
-      6
-    ]
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 7,
-  "fields": {
-    "user": 7,
-    "name": "Максим",
-    "surname": "Ковалев",
-    "avatar": "avatars/comp1.jpg",
-    "about": "Backend-разработчик на Python. Люблю Django, PostgreSQL и автоматизацию процессов.",
-    "phone": "",
-    "github_url": "https://github.com/maxx",
-    "created_at": "2026-06-12T21:09:35.809Z",
-    "skills": [
-      7,
       1,
-      4,
+      3,
       2
     ]
   }
 },
 {
-  "model": "users.profile",
-  "pk": 8,
+  "model": "users.user",
+  "pk": 2,
   "fields": {
-    "user": 8,
-    "name": "Елизавета",
-    "surname": "Орлова",
-    "avatar": "avatars/comp.webp",
-    "about": "Frontend-разработчик. Работаю с React и TypeScript, люблю создавать удобные пользовательские интерфейсы.",
+    "password": "pbkdf2_sha256$1000000$vsO835uhihTxbEzTlqDGqn$XWHnlovEoutuH9o7WRL0n/4MYCgJTLu6OQzlaRlWhdA=",
+    "last_login": "2026-06-14T19:58:47.794Z",
+    "is_superuser": false,
+    "username": "maxim@yandex.ru",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-14T19:58:46.443Z",
+    "email": "maxim@yandex.ru",
+    "name": "Максим",
+    "surname": "Ковалев",
+    "avatar": "",
+    "about": "Backend-разработчик на Python. Люблю Django, PostgreSQL и автоматизацию процессов.",
     "phone": "",
-    "github_url": "https://github.com/lizaor",
-    "created_at": "2026-06-12T21:12:00.745Z",
+    "github_url": "",
+    "created_at": "2026-06-14T19:58:47.782Z",
+    "groups": [],
+    "user_permissions": [],
     "skills": [
-      8,
-      9,
-      10,
-      11
+      5,
+      7,
+      6,
+      4
     ]
   }
 },
 {
-  "model": "users.profile",
-  "pk": 9,
+  "model": "users.user",
+  "pk": 3,
   "fields": {
-    "user": 9,
+    "password": "pbkdf2_sha256$1000000$11tMiWYrdEiE0XP1fBM0dY$ZysEep817uEJRKaGY6jestzGpkljzKDPC3nftYxaoEc=",
+    "last_login": "2026-06-14T20:01:21.695Z",
+    "is_superuser": false,
+    "username": "artem@example.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-14T20:01:20.364Z",
+    "email": "artem@example.com",
     "name": "Артем",
     "surname": "Соколов",
-    "avatar": "avatars/нейро.jpg",
+    "avatar": "",
     "about": "Full-stack разработчик. Интересуюсь стартапами, облачными технологиями и DevOps-практиками.",
     "phone": "",
-    "github_url": "https://github.com/artem-volkov",
-    "created_at": "2026-06-12T21:16:00.478Z",
-    "skills": [
-      12,
-      1,
-      7,
-      13
-    ]
-  }
-},
-{
-  "model": "projects.project",
-  "pk": 8,
-  "fields": {
-    "name": "Платформа поиска мероприятий EventHub",
-    "description": "Сервис для поиска и публикации локальных мероприятий с возможностью регистрации участников.",
     "github_url": "",
-    "owner": 9,
-    "status": "open",
-    "created_at": "2026-06-12T21:18:00.076Z",
-    "participants": [
-      9
+    "created_at": "2026-06-14T20:01:21.688Z",
+    "groups": [],
+    "user_permissions": [],
+    "skills": [
+      8,
+      7,
+      9,
+      4
+    ]
+  }
+},
+{
+  "model": "users.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$j2ScGncaW3HNRD0jXWkEwF$PUy3wVoLIKl8Ox2yuqNnTM4Kj7/ZXdTw1NG1Is1DCHs=",
+    "last_login": "2026-06-14T20:03:34.986Z",
+    "is_superuser": false,
+    "username": "liza@yandex.ru",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-14T20:03:33.638Z",
+    "email": "liza@yandex.ru",
+    "name": "Елизавета",
+    "surname": "Орлова",
+    "avatar": "",
+    "about": "Frontend-разработчик. Работаю с React и TypeScript, люблю создавать удобные пользовательские интерфейсы.",
+    "phone": "",
+    "github_url": "",
+    "created_at": "2026-06-14T20:03:34.974Z",
+    "groups": [],
+    "user_permissions": [],
+    "skills": [
+      13,
+      11,
+      10,
+      12
     ]
   }
 },
 {
   "model": "projects.project",
-  "pk": 9,
+  "pk": 1,
   "fields": {
     "name": "Библиотека дизайн-систем DesignBase",
     "description": "Каталог готовых UI-компонентов и дизайн-паттернов для команд разработки.",
     "github_url": "",
     "owner": 1,
-    "status": "closed",
-    "created_at": "2026-06-12T21:20:12.543Z",
+    "status": "open",
+    "created_at": "2026-06-14T19:56:08.690Z",
     "participants": [
       1
     ]
@@ -201,48 +230,61 @@
 },
 {
   "model": "projects.project",
-  "pk": 10,
-  "fields": {
-    "name": "Платформа для изучения языков SpeakEasy",
-    "description": "Онлайн-сервис для практики иностранных языков через общение и интерактивные упражнения.",
-    "github_url": "",
-    "owner": 8,
-    "status": "open",
-    "created_at": "2026-06-12T21:20:54.971Z",
-    "participants": [
-      8,
-      1
-    ]
-  }
-},
-{
-  "model": "projects.project",
-  "pk": 11,
-  "fields": {
-    "name": "Финансовый помощник BudgetTrack",
-    "description": "Сервис для учёта личных расходов и доходов с визуализацией статистики.",
-    "github_url": "",
-    "owner": 7,
-    "status": "open",
-    "created_at": "2026-06-12T21:21:32.035Z",
-    "participants": [
-      7
-    ]
-  }
-},
-{
-  "model": "projects.project",
-  "pk": 12,
+  "pk": 2,
   "fields": {
     "name": "Система управления задачами TaskFlow",
     "description": "Веб-приложение для управления командными задачами с поддержкой ролей, комментариев и уведомлений.",
     "github_url": "",
-    "owner": 7,
+    "owner": 2,
     "status": "open",
-    "created_at": "2026-06-12T21:21:59.869Z",
+    "created_at": "2026-06-14T20:00:15.521Z",
     "participants": [
-      7,
-      1
+      2
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 3,
+  "fields": {
+    "name": "Финансовый помощник BudgetTrack",
+    "description": "Сервис для учёта личных расходов и доходов с визуализацией статистики.",
+    "github_url": "",
+    "owner": 2,
+    "status": "open",
+    "created_at": "2026-06-14T20:00:36.318Z",
+    "participants": [
+      2
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 4,
+  "fields": {
+    "name": "Платформа поиска мероприятий EventHub",
+    "description": "Сервис для поиска и публикации локальных мероприятий с возможностью регистрации участников.",
+    "github_url": "",
+    "owner": 3,
+    "status": "open",
+    "created_at": "2026-06-14T20:02:55.219Z",
+    "participants": [
+      3
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 5,
+  "fields": {
+    "name": "Платформа для изучения языков SpeakEasy",
+    "description": "Онлайн-сервис для практики иностранных языков через общение и интерактивные упражнения.",
+    "github_url": "",
+    "owner": 4,
+    "status": "open",
+    "created_at": "2026-06-14T20:04:59.184Z",
+    "participants": [
+      4
     ]
   }
 }

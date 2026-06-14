@@ -1,31 +1,39 @@
 from django import forms
-from .models import Profile
+
+from .models import User
 
 
 class LoginForm(forms.Form):
-    email = forms.CharField(label="Email")
+    email = forms.EmailField(label="Email")
     password = forms.CharField(
         label="Пароль",
-        widget=forms.PasswordInput
+        widget=forms.PasswordInput,
     )
+
 
 class RegisterForm(forms.Form):
     name = forms.CharField(label="Имя", max_length=100)
-
     surname = forms.CharField(label="Фамилия", max_length=100)
-
     email = forms.EmailField(label="Email")
-
     password = forms.CharField(
         label="Пароль",
-        widget=forms.PasswordInput
+        widget=forms.PasswordInput,
     )
 
-class ProfileForm(forms.ModelForm):
+    def clean_email(self):
+        email = self.cleaned_data["email"]
 
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(
+                "Пользователь с таким email уже существует"
+            )
+
+        return email
+
+
+class UserForm(forms.ModelForm):
     class Meta:
-        model = Profile
-
+        model = User
         fields = [
             "avatar",
             "name",
