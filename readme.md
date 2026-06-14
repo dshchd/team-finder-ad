@@ -1,6 +1,117 @@
-## Загрузка тестовых данных
+# TeamFinder
 
-В репозитории присутствует файл `test_data.json` с тестовыми пользователями, проектами и навыками.
+TeamFinder — веб-приложение для поиска участников в проектные команды. Пользователи могут регистрироваться, заполнять профиль, добавлять навыки, создавать проекты и присоединяться к проектам других участников.
+
+## Технологии
+
+* Python
+* Django
+* PostgreSQL
+* Docker Compose
+* HTML
+* CSS
+* JavaScript
+
+## Локальный запуск проекта
+
+### 1. Клонирование репозитория
+
+```bash
+git clone https://github.com/dshchd/team-finder-ad.git
+cd team-finder-ad
+```
+
+### 2. Создание виртуального окружения
+
+```bash
+python -m venv venv
+```
+
+Активация окружения:
+
+Windows PowerShell:
+
+```bash
+venv\Scripts\Activate.ps1
+```
+
+Windows cmd:
+
+```bash
+venv\Scripts\activate
+```
+
+Linux/macOS:
+
+```bash
+source venv/bin/activate
+```
+
+### 3. Установка зависимостей
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Настройка переменных окружения
+
+Скопируйте файл `.env_example` в `.env`:
+
+```bash
+cp .env_example .env
+```
+
+Пример содержимого `.env`:
+
+```env
+DJANGO_SECRET_KEY=change_for_safety
+DJANGO_DEBUG=True
+DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+
+POSTGRES_DB=team_finder
+POSTGRES_USER=team_finder
+POSTGRES_PASSWORD=team_finder
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+
+TASK_VERSION=2
+```
+
+Описание переменных:
+
+| Переменная           | Описание                        |
+| -------------------- | ------------------------------- |
+| DJANGO_SECRET_KEY    | Секретный ключ Django           |
+| DJANGO_DEBUG         | Режим отладки                   |
+| DJANGO_ALLOWED_HOSTS | Разрешённые хосты через запятую |
+| POSTGRES_DB          | Название базы данных            |
+| POSTGRES_USER        | Пользователь PostgreSQL         |
+| POSTGRES_PASSWORD    | Пароль PostgreSQL               |
+| POSTGRES_HOST        | Хост PostgreSQL                 |
+| POSTGRES_PORT        | Порт PostgreSQL                 |
+| TASK_VERSION         | Номер варианта шаблонов         |
+
+### 5. Запуск PostgreSQL через Docker Compose
+
+```bash
+docker compose up -d
+```
+
+Остановить контейнеры:
+
+```bash
+docker compose down
+```
+
+### 6. Применение миграций
+
+```bash
+python manage.py migrate
+```
+
+### 7. Загрузка тестовых данных
+
+В репозитории присутствует файл `test_data.json` с тестовыми пользователями, навыками и проектами.
 
 После применения миграций загрузите данные:
 
@@ -8,112 +119,36 @@
 python manage.py loaddata test_data.json
 ```
 
-Будут созданы тестовые профили и проекты для проверки функциональности приложения.
+Будут созданы тестовые пользователи, навыки и проекты для проверки функциональности приложения.
 
-# Первоначальная настройка проекта TeamFinder
-
-## 1. Виртуальное окружение
-
-Перед началом работы необходимо создать и активировать виртуальное окружение Python.  
-
-
-1. **Создайте виртуальное окружение (в папке проекта):**
-   ```bash
-   python3 -m venv venv
-   ```
-
-   После этого появится папка `venv`, где будут храниться зависимости проекта.
-
-2. **Активируйте окружение:**
-
-    - **Windows (PowerShell):**
-      ```bash
-      venv\Scripts\Activate.ps1
-      ```
-    - **Windows (cmd):**
-      ```bash
-      venv\Scripts\activate
-      ```
-    - **Linux/Mac:**
-      ```bash
-      source venv/bin/activate
-      ```
-
-3. **Установите зависимости из `requirements.txt`:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-   После установки в окружении будут доступны все нужные библиотеки Django-проекта.
-
-## 2. Создание `.env`
-
-Файл `.env` содержит конфиденциальные настройки проекта — ключ Django, параметры БД и другие переменные.  
-
-Особое внимание обратите на строчку `TASK_VERSION=`. 
-Добавьте число, которое соответствует вашему варианту задания. 
-Этот параметр определяет, какие шаблоны использовать для сайта (из папок `templates_var1`/`templates_var2`/`templates_var3`).
-Лишние две папки не из вашего варианта можно удалить.
-
-В репозитории есть пример `.env_example`, который нужно скопировать и заполнить:
-
-```bash
-cp .env_example .env
-```
-
-После этого откройте `.env` и укажите свои значения.  
-
-| Переменная            | Назначение                                                                                                                                                 |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **DJANGO_SECRET_KEY** | Секретный ключ Django, используемый для подписи cookie и токенов. Можно сгенерировать при помощи `get_random_secret_key` из `django.core.management.utils` |
-| **DJANGO_DEBUG**      | Режим отладки. Установите `True` во время разработки.                                                                                                      |
-| **POSTGRES_DB**       | Имя базы данных PostgreSQL, которую будет использовать Django.                                                                                             |
-| **POSTGRES_USER**     | Имя пользователя PostgreSQL.                                                                                                                               |
-| **POSTGRES_PASSWORD** | Пароль пользователя PostgreSQL.                                                                                                                            |
-| **POSTGRES_HOST**     | Адрес сервера БД. В случае локальной разработки localhost.                                                                                                 |
-| **POSTGRES_PORT**     | Порт подключения к БД (по умолчанию `5432`).                                                                                                               |
-| **TASK_VERSION**      | Номер варианта вашего задания. Используется для определения набора HTML-шаблонов.                                                                          |
-
----
-
-## 3. Запуск PostgreSQL
-
-Для работы приложения **TeamFinder** используется база данных **PostgreSQL**.
-По условию задания база данных должна запускаться в контейнере Docker.
-
-В проекте уже есть пример файла `docker-compose.yml`. 
-Используйте готовый или измените под свои нужды, а дальше запускайте:
-
-```bash
-docker compose up -d
-```
-
-`-d` значит `detach`, то есть контейнер продолжит работать в фоне. Чтобы его остановить, надо будет ввести
-
-```bash
-docker compose down
-```
-
-Если возникает ошибка "permission denied while trying to connect to the Docker daemon socket", то может потребоваться добавить `sudo` перед командой.
-
----
-
-После этого база данных будет доступна по адресу `localhost:5432`.  
-Нужно будет использовать эти же параметры в файле `.env`.
-
-> Если на компьютере уже развёрнут сервер БД на порте 5432, и вы не хотите создавать БД для этого проекта на этом сервере, целесообразнее будет изменить порт на нестандартный.
-> Нестандартный порт нужно будет поставить слева в паре портов в docker-compose (`"5433":"5432"`) и в .env.
-
-## 4. Запуск Django
-
-После заполнения `.env` и настройки базы данных можно запустить сервер разработки:
+### 8. Запуск сервера разработки
 
 ```bash
 python manage.py runserver
 ```
 
-Теперь проект доступен по адресу [http://localhost:8000](http://localhost:8000). 
-Если видите ракету с надписью "The install worked successfully! Congratulations!", то запуск прошёл успешно, Django работает!
-Осталось всего ничего: реализовать весь проект!
+После запуска проект будет доступен по адресу:
 
-Если в процессе разработки способ развертывания приложения поменяется, обновите `readme.md` с пометкой ревьюеру, как запускать и проверять приложение.
+```text
+http://127.0.0.1:8000
+```
+
+## Тестовые пользователи
+
+После загрузки `test_data.json` доступны следующие аккаунты:
+
+| Email                             | Пароль       |
+| --------------------------------- | ------------ |
+| tchertkovadasha@yandex.ru         | loll         |
+| maxim@example.com                 | maxim        |
+| elizaveta@example.com             | elizabeth123 |
+| artem@example.com                 | artem        |
+
+## Проверка качества кода
+
+```bash
+python manage.py check
+python manage.py makemigrations
+flake8 users projects team_finder manage.py --exclude=migrations --max-line-length=100
+isort users projects team_finder manage.py --check-only
+```
