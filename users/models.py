@@ -3,7 +3,6 @@ from django.db import models
 
 from .managers import UserManager
 
-
 SKILL_NAME_MAX_LENGTH = 100
 USER_NAME_MAX_LENGTH = 100
 PHONE_MAX_LENGTH = 20

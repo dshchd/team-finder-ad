@@ -1,11 +1,7 @@
 import json
 
-from django.contrib.auth import (
-    authenticate,
-    login,
-    logout,
-    update_session_auth_hash,
-)
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -13,7 +9,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LoginForm, RegisterForm, UserForm
 from .models import Skill, User
-
 
 USERS_PER_PAGE = 12
 DEFAULT_PAGE_NUMBER = 1

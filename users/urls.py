@@ -1,17 +1,8 @@
 from django.urls import path
 
-from .views import (
-    users_list,
-    user_detail,
-    edit_profile,
-    change_password,
-    logout_view,
-    login_view,
-    register_view,
-    skills_list,
-    add_skill,
-    remove_skill,
-)
+from .views import (add_skill, change_password, edit_profile, login_view,
+                    logout_view, register_view, remove_skill, skills_list,
+                    user_detail, users_list)
 
 app_name = "users"
 
@@ -53,13 +44,13 @@ urlpatterns = [
         skills_list,
         name="skills_list"
     ),
-    
+
     path(
         "<int:user_id>/skills/add/",
         add_skill,
         name="add_skill"
     ),
-    
+
     path(
         "<int:user_id>/skills/<int:skill_id>/remove/",
         remove_skill,

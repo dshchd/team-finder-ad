@@ -7,7 +7,6 @@ from django.views.decorators.http import require_POST
 from .forms import ProjectForm
 from .models import Project
 
-
 PROJECTS_PER_PAGE = 12
 DEFAULT_PAGE_NUMBER = 1
 

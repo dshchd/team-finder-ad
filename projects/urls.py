@@ -1,13 +1,7 @@
 from django.urls import path
 
-from .views import (
-    project_list,
-    create_project,
-    project_detail,
-    complete_project,
-    toggle_participate,
-    edit_project,
-)
+from .views import (complete_project, create_project, edit_project,
+                    project_detail, project_list, toggle_participate)
 
 app_name = "projects"
 
@@ -43,7 +37,7 @@ urlpatterns = [
         complete_project,
         name="complete_project"
     ),
-    
+
     path(
         "projects/<int:pk>/toggle-participate/",
         toggle_participate,
